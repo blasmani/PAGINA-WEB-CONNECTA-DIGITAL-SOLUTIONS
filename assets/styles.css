@@ -589,6 +589,12 @@ img { max-width: 100%; height: auto; display: block; }
 .ficha__celda { padding: var(--e6); border-left: 1px solid var(--linea-oscura); }
 .ficha__celda:nth-child(odd) { border-left: 0; }
 .ficha__celda:nth-child(n + 3) { border-top: 1px solid var(--linea-oscura); }
+/*
+ * Con un número IMPAR de celdas, la última se quedaba sola ocupando media fila y el hueco
+ * de al lado partía el rectángulo de la ficha por la esquina. Que ocupe las dos columnas.
+ * Da igual cuántas celdas haya: el selector solo casa cuando la última es la impar.
+ */
+.ficha__celda:last-child:nth-child(odd) { grid-column: 1 / -1; }
 
 @media (max-width: 760px) {
   .ficha { grid-template-columns: 1fr; }

@@ -25,15 +25,34 @@ siempre coinciden entre sí**, así que aquí queda escrito cuál gana y por qu�
 | Ficha RUC de la SUNAT | 21/08/2026 | RUC, partida, actividades CIIU, domicilio normalizado |
 | Escritura pública de constitución | 11/02/2026 | razón social, objeto social, capital, socios, gerente, domicilio literal |
 | El dueño, por escrito | 21/08/2026 | teléfono comercial y correo de contacto |
+| Registro D-U-N-S (vía Apple Developer) | 21/08/2026 | número D-U-N-S, dirección normalizada y código postal |
 
-### La dirección: manda la escritura, no la SUNAT
+### La dirección: manda el registro D-U-N-S — y esto CAMBIÓ
 
-La escritura dice **«JR. MARSELLA 255 INT. PISO 4»** y **«ASOC. PRO VIVIENDA BUENOS AIRES»**.
-La ficha RUC lo traduce a su propia taxonomía —«CAL. MARSELLA», «URB. BUENOS AIRES»,
-«Dpto 4»— porque sus formularios solo admiten esas abreviaturas. No son dos direcciones
-distintas: es la misma escrita en dos sistemas. La web usa la de la escritura, que es el
-documento constitutivo, **y añade el distrito** (San Juan de Lurigancho), que dicen los dos y
-que es lo primero que busca quien verifica.
+Aquí ponía que mandaba la escritura pública, y era lo correcto **mientras solo hubo dos
+fuentes**. El 21/08/2026 apareció una tercera que pesa más para lo que esta web tiene que
+conseguir: el **registro D-U-N-S**, número **474618965**, que Dun & Bradstreet creó a partir
+de los datos de la SUNAT.
+
+| Fuente | Cómo escribe la dirección |
+|---|---|
+| Escritura pública | `JR. MARSELLA 255 INT. PISO 4` · `ASOC. PRO VIVIENDA BUENOS AIRES` |
+| Ficha RUC (SUNAT) | `CAL. MARSELLA Nro 255` · `Dpto 4` · `URB. BUENOS AIRES` |
+| **Registro D-U-N-S** | **`Calle MARSELLA 255 DPTO. 4, URB. BUENOS AIRES`, Lima, CP 15457** |
+
+Es la misma dirección escrita de tres maneras. La web usa **la del D-U-N-S**, porque es el
+registro contra el que Apple compara este sitio —su pantalla de inscripción lo dice: «la
+información de esta cuenta se utilizará para verificación»— y el que pedirá Microsoft para
+la cuenta Company. Que la web y ese registro coincidan palabra por palabra es justamente el
+trabajo de esta página.
+
+Se añaden el **distrito** (San Juan de Lurigancho) y el **código postal 15457**: no
+contradicen al D-U-N-S —San Juan de Lurigancho es un distrito de Lima— y son lo que permite
+localizar el inmueble.
+
+El **número D-U-N-S se publica** en la ficha, junto al RUC. Es un identificador de empresa,
+no un dato personal, y es el número con el que Apple y Microsoft cruzan razón social,
+dirección y teléfono: tenerlo a la vista le ahorra al verificador el paso de pedirlo.
 
 ### La fecha de constitución NO se publica, y es a propósito
 

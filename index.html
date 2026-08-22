@@ -47,13 +47,15 @@
   "url": "https://connectadigitalsolutions.com/",
   "logo": "https://connectadigitalsolutions.com/assets/marca.svg",
   "taxID": "20615591221",
+  "duns": "474618965",
   "founder": { "@type": "Person", "name": "Anahiy Marilyn Titi Quispe" },
   "employee": { "@type": "Person", "name": "Anahiy Marilyn Titi Quispe", "jobTitle": "Gerente General" },
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Jr. Marsella N.º 255, Piso 4, Asoc. Pro Viv. Buenos Aires",
+    "streetAddress": "Calle Marsella 255, Dpto. 4, Urb. Buenos Aires",
     "addressLocality": "San Juan de Lurigancho",
     "addressRegion": "Lima",
+    "postalCode": "15457",
     "addressCountry": "PE"
   },
   "contactPoint": {
@@ -328,6 +330,16 @@
           <dd class="mono">20615591221</dd>
         </div>
         <!--
+          El D-U-N-S se publica a propósito. Es un identificador de EMPRESA, no un dato
+          personal, y es justo el número con el que Apple y Microsoft cruzan la razón social,
+          la dirección y el teléfono. Tenerlo a la vista en la misma tarjeta que el RUC le
+          ahorra al verificador el paso de pedirlo.
+        -->
+        <div class="ficha__celda">
+          <dt data-es="Número D-U-N-S" data-en="D-U-N-S Number">Número D-U-N-S</dt>
+          <dd class="mono">474618965<small data-es="Dun &amp; Bradstreet" data-en="Dun &amp; Bradstreet">Dun &amp; Bradstreet</small></dd>
+        </div>
+        <!--
           SIN fecha de inscripción, y no es un olvido. La ficha RUC de la SUNAT da como
           «Fecha Inscripción RR.PP.» el 30/01/2026, pero la escritura pública que constituye
           la sociedad lleva fecha del 11/02/2026 y su testimonio se expidió el 19/02/2026: no
@@ -350,16 +362,26 @@
           <dd>Anahiy Marilyn Titi Quispe<small data-es="Gerente General" data-en="General Manager">Gerente General</small></dd>
         </div>
         <!--
-          La dirección se escribe como la escritura pública, NO como la normaliza la SUNAT.
-          La escritura dice «JR. MARSELLA 255 INT. PISO 4» y «ASOC. PRO VIVIENDA BUENOS
-          AIRES»; la ficha RUC lo traduce a su propia taxonomía —«CAL. MARSELLA», «URB.
-          BUENOS AIRES», «Dpto 4»— porque sus formularios solo admiten esas abreviaturas.
-          Manda el documento constitutivo. El distrito sí se añade: lo dicen los dos, y es lo
-          primero que busca quien verifica.
+          La dirección se escribe como el registro D-U-N-S, y esto CAMBIÓ el 2026-08-21.
+          Aquí ponía la redacción de la escritura pública —«JR. MARSELLA 255 INT. PISO 4»,
+          «ASOC. PRO VIVIENDA BUENOS AIRES»— porque era el documento constitutivo y la única
+          alternativa era la normalización de la SUNAT. Ese razonamiento se quedó viejo en
+          cuanto apareció una tercera fuente que MANDA MÁS: el registro D-U-N-S, que Dun &
+          Bradstreet creó a partir de los datos de la SUNAT y que dice
+          «Calle MARSELLA 255 DPTO. 4, URB. BUENOS AIRES», Lima, código postal 15457.
+
+          Ese es el registro contra el que Apple compara este sitio web —lo dice su propia
+          pantalla de inscripción: «la información de esta cuenta se utilizará para
+          verificación»— y es el que pedirá Microsoft para la cuenta Company. La web tiene
+          que leerse igual que él. Es la misma dirección escrita de otra manera, así que no
+          se pierde nada y se gana que las dos fuentes coincidan palabra por palabra.
+
+          El distrito y el código postal se añaden: no contradicen al D-U-N-S —San Juan de
+          Lurigancho es un distrito de Lima— y son lo que permite localizar el inmueble.
         -->
         <div class="ficha__celda">
           <dt data-es="Domicilio" data-en="Registered address">Domicilio</dt>
-          <dd>Jr. Marsella N.º 255, Piso 4<small data-es="Asoc. Pro Viv. Buenos Aires, San Juan de Lurigancho, Lima, Perú" data-en="Asoc. Pro Viv. Buenos Aires, San Juan de Lurigancho, Lima, Peru">Asoc. Pro Viv. Buenos Aires, San Juan de Lurigancho, Lima, Perú</small></dd>
+          <dd>Calle Marsella 255, Dpto. 4<small data-es="Urb. Buenos Aires, San Juan de Lurigancho, Lima 15457, Perú" data-en="Urb. Buenos Aires, San Juan de Lurigancho, Lima 15457, Peru">Urb. Buenos Aires, San Juan de Lurigancho, Lima 15457, Perú</small></dd>
         </div>
         <!--
           Se listan las TRES actividades tal como están inscritas, sin decir cuál es la
