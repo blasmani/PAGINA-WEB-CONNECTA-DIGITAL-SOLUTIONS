@@ -131,10 +131,32 @@ Tres consecuencias, y ninguna es teórica:
    publicación se va a apoyar en «somos una empresa de software», lo limpio es **modificar el
    objeto social** para incluir el desarrollo de software: junta de accionistas, escritura e
    inscripción en SUNARP.
-3. **Ser PSAV en Perú no es una etiqueta inocua.** Los proveedores de servicios de activos
-   virtuales entran en el ámbito de la normativa de prevención de lavado de activos y tienen
-   obligaciones ante la UIF-SBS. Si la empresa se constituyó así, **hay que preguntarle al
-   contador o al abogado qué implica**, porque no depende de que la actividad se ejerza o no.
+3. **Ser PSAV en Perú: no hace falta autorización, pero sí hay obligaciones.** Aquí ponía
+   «hay que preguntarle al contador o al abogado qué implica». Ya está preguntado y
+   respondido por la propia SBS, así que se sustituye por el dato: **Oficio N.º
+   22712-2026-SBS, del 15 de abril de 2026** (expediente 2026-00024661), en respuesta a la
+   consulta que presentó la empresa el 13/02/2026. Dice dos cosas, y las dos importan.
+
+   **La buena:** *«la constitución y funcionamiento de las PSAV no se rige por las
+   disposiciones emitidas por esta Superintendencia […] ni requieren autorización o registro
+   previo ante la misma»*. No hace falta permiso de la SBS para operar.
+
+   **La otra:** *«Sin perjuicio de ello, en su calidad de sujetos obligados a reportar a la
+   UIF, conforme a lo dispuesto en el Decreto Supremo N.º 006-2023-JUS, los PSAV deben
+   cumplir con la normativa sectorial específica en materia de prevención del lavado de
+   activos y del financiamiento del terrorismo»*. Esa normativa es la aprobada por
+   **Resolución SBS N.º 2648-2024**, y el propio oficio señala que sus **artículos 5 al 13**
+   regulan la designación, los requisitos y las funciones del **Oficial de Cumplimiento**,
+   cuya designación **debe comunicarse a la UIF-Perú por la plataforma SISDEL**
+   (`plaft.sbs.gob.pe/sisdel`).
+
+   O sea: *no necesita autorización previa* y *sí es sujeto obligado* son las dos frases del
+   mismo papel, y la segunda no desaparece porque la primera sea cierta. El oficio añade
+   además que sus opiniones **no son vinculantes** y no sustituyen a la norma.
+
+   Nada de esto afecta a lo que dice la web. Se anota aquí porque es el contexto de la
+   empresa que la web representa, y porque el papel está guardado con su código de
+   verificación (`XKLAGS-001`) por si hay que acreditarlo ante Microsoft o ante un banco.
 
 ### 5. El nombre de la gerente general sí está en la web
 
