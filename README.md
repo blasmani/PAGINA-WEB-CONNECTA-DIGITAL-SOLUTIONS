@@ -89,21 +89,28 @@ la web y en la ficha de la tienda— y usar ese. `connectadigitalsolutions.com` 
 ningún registro MX** hoy, así que hay que contratar el correo en GoDaddy o apuntar el MX a
 otro proveedor.
 
-### 3. Para que la web se vea, hay que cambiar el DNS en GoDaddy
+### 3. El DNS de GoDaddy: HECHO el 21/08/2026
 
-Hoy `connectadigitalsolutions.com` apunta a `3.33.130.190` y `15.197.148.33`, que son las
-direcciones de aparcamiento de GoDaddy. Mientras sigan ahí, lo publicado en GitHub Pages **no
-se ve en el dominio**. Hay que dejarlo como ya está `autotradep2p.com`:
+Estaba pendiente y ya está aplicado. Antes había **un solo** registro `A` de `@` cuyo valor
+era literalmente `Parked`. Ahora:
 
-| Tipo | Nombre | Valor |
-|---|---|---|
-| A | @ | `185.199.108.153` |
-| A | @ | `185.199.109.153` |
-| A | @ | `185.199.110.153` |
-| A | @ | `185.199.111.153` |
-| CNAME | www | `blasmani.github.io` |
+| Tipo | Nombre | Valor | TTL |
+|---|---|---|---|
+| A | @ | `185.199.108.153` | 600 s |
+| A | @ | `185.199.109.153` | 600 s |
+| A | @ | `185.199.110.153` | 600 s |
+| A | @ | `185.199.111.153` | 600 s |
+| CNAME | www | `blasmani.github.io` | 1 h |
 
-Hoy `www` es un CNAME al propio dominio; hay que cambiarlo por el de GitHub.
+No se tocó nada más: los dos `NS`, el `SOA`, el `CNAME _domainconnect` y el `TXT _dmarc`
+siguen como estaban. Y se comprobó la pestaña **Reenvío**: «Dominio: no configurado» y
+«Subdominios: no configurado». Eso importa porque un reenvío activo manda **por encima** de
+la zona DNS y habría dejado los cuatro registros nuevos sin efecto.
+
+Verificado contra dos resolutores públicos —`1.1.1.1` y `8.8.8.8`, no el del equipo, que
+inventa respuestas— y de punta a punta sobre HTTPS: portada, `privacidad.html`, la hoja de
+estilos y la captura, las cinco con `200`. El certificado lo emitió GitHub y el **HTTPS
+obligatorio está activado**.
 
 ### 4. El objeto social de la escritura no menciona el software
 
