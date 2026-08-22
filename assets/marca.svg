@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!--
+    La marca: una C abierta con un nodo en el extremo. La C es de «Connecta» y el nodo es lo
+    que la abre — un punto de conexión, no un círculo cerrado. Se dibuja con trazo, no con
+    relleno, para que a 16 px del favicon siga leyendose como una C y no como una mancha.
+
+    Fondo marino redondeado porque el favicon se ve sobre pestañas claras y oscuras: sin
+    fondo propio, la C marina desaparece en un navegador en modo oscuro.
+  -->
+  <rect width="64" height="64" rx="14" fill="#0b192c"/>
+  <path d="M43.6 22.4a17 17 0 1 0 0 19.2" fill="none" stroke="#ffffff" stroke-width="4.6" stroke-linecap="round"/>
+  <circle cx="43.6" cy="22.4" r="5.2" fill="#008dda"/>
+</svg>

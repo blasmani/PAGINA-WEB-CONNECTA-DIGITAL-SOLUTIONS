@@ -1,0 +1,674 @@
+/* ============================================================================
+ * CONNECTA DIGITAL SOLUTIONS S.A.C. — sitio corporativo.
+ * Dirección de diseño: «Documento», 2026-08-21.
+ *
+ * ## Por qué CLARO, si la web del producto es oscura
+ *
+ * Son dos cosas distintas y tienen que leerse distinto. `autotradep2p.com` vende una
+ * herramienta que se usa de noche mirando precios: fondo negro, acento amarillo, aire de
+ * instrumento. Esto de aquí es la EMPRESA, y a esta página llega sobre todo quien viene a
+ * comprobar que existe —un revisor de una tienda de aplicaciones, un cliente, un banco—.
+ * Lo que convence ahí no es el espectáculo: es que la página se lea como un documento bien
+ * compuesto y que los datos registrales estén donde se buscan. De ahí el nombre.
+ *
+ * Consecuencia práctica: NADA de efectos. Nada rebota, nada se levanta al pasar el ratón,
+ * nada late en bucle. El azul relleno aparece una vez por pantalla. Lo premium es la
+ * precisión.
+ *
+ * ## La paleta sale de la propuesta del dueño, pero CORREGIDA
+ *
+ * La propuesta traía `#0B192C` marino, `#008DDA` cian y `#F4F6F9` de fondo. Los tres se
+ * quedan, pero el cian sobre blanco da **3,61:1** — vale para un trazo de icono o un borde
+ * (WCAG 1.4.11 pide 3:1 a los componentes) y NO vale para texto (1.4.3 pide 4,5:1). Por eso
+ * hay dos azules y no uno: `--acento` para dibujar y `--acento-texto` para escribir. Todas
+ * las razones de este fichero están medidas, no estimadas.
+ *
+ * ## REGLA QUE NO DA ERROR EN CONSOLA CUANDO SE ROMPE
+ *
+ *   `idioma.js` hace  n.innerHTML = n.getAttribute('data-' + idioma)  sobre CADA elemento
+ *   con [data-es]. Cualquier <svg> que quede DENTRO de un elemento traducido desaparece la
+ *   primera vez que alguien pulsa EN, y no vuelve hasta recargar. El SVG va SIEMPRE como
+ *   HERMANO del <span> traducido, jamás dentro.
+ *     BIEN : <p class="fila"><svg class="i">…</svg><span data-es="…" data-en="…">…</span></p>
+ *     MAL  : <p data-es="…" data-en="…"><svg>…</svg>texto</p>
+ * ========================================================================== */
+
+:root {
+  /* --- planos ------------------------------------------------------------- */
+  --fondo: #ffffff;
+  --fondo-2: #f4f6f9;        /* bandas alternas y celdas */
+  --marino: #0b192c;         /* banda oscura: ficha registral y pie */
+  --marino-2: #132741;       /* celda dentro de la banda oscura */
+
+  /* --- filetes. HEX sólidos, no rgba: el mismo valor sobre los dos planos -- */
+  --linea: #e3e8ee;          /* separador interior */
+  --linea-fuerte: #c9d3de;   /* contorno de panel */
+  --linea-oscura: #22364f;   /* separador DENTRO de la banda marino */
+
+  /* --- texto. Contraste alto de tamaño, bajo de color --------------------- */
+  --tinta: #0b192c;          /* 17,65:1 sobre blanco · 16,30:1 sobre --fondo-2 */
+  --tinta-2: #4a5a70;        /*  7,03:1 · 6,49:1. Párrafos */
+  --tinta-3: #54627a;        /*  6,17:1 · 5,70:1. Rótulos y notas al pie.
+                                El #6b7a90 que probé primero da 4,36:1 y se queda
+                                por DEBAJO del 4,5 que pide AA. No se usa */
+  --sobre-marino: #ffffff;      /* 17,65:1 */
+  --sobre-marino-2: #c9d4e2;    /* 11,77:1 */
+
+  /* --- acento. DOS azules, y la diferencia no es estética ------------------ */
+  --acento: #008dda;         /* 3,61:1 sobre blanco. SOLO trazo, borde y relleno */
+  --acento-texto: #0a6ca6;   /* 5,66:1 sobre blanco · 5,23:1 sobre --fondo-2.
+                                Todo texto azul usa este, nunca --acento */
+  --acento-claro: #4fb3e8;   /* 7,52:1 sobre --marino. Enlaces de la banda oscura */
+  --acento-8: rgba(0, 141, 218, 0.08);
+  --acento-16: rgba(0, 141, 218, 0.16);
+
+  /* --- tipografía --------------------------------------------------------- */
+  --sans: 'Inter', 'Inter respaldo', 'Segoe UI Variable Text', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Cascadia Mono', Consolas, ui-monospace, monospace;
+
+  --t-h1: clamp(2.25rem, 1.15rem + 4.7vw, 4.25rem);           /* 36px @375 · 68px desde 1146 */
+  --t-h2: clamp(1.75rem, 1.25rem + 2.1vw, 2.75rem);           /* 28px @375 · 44px desde 1071 */
+  --t-h3: clamp(1.125rem, 1.06rem + 0.28vw, 1.3125rem);       /* 18 → 21px */
+  --t-entradilla: clamp(1.0625rem, 0.98rem + 0.37vw, 1.25rem);/* 17 → 20px */
+  --t-cuerpo: 1.0625rem;     /* 17px. Suelo de lectura */
+  --t-celda: 1rem;           /* 16px dentro de tarjeta */
+  --t-micro: 0.8125rem;      /* 13px: notas, legal, © */
+  --t-mono: 0.75rem;         /* 12px: rótulos. SUELO ABSOLUTO del sitio */
+
+  /* --- espaciado. Escala de 4, sin valores fuera de ella ------------------- */
+  --e1: 4px;  --e2: 8px;  --e3: 12px; --e4: 16px; --e5: 20px;
+  --e6: 24px; --e7: 32px; --e8: 48px; --e9: 64px;
+
+  --gutter: clamp(20px, 5vw, 40px);   /* 5vw@375 = 18,75 < 20 ⇒ 20px exactos */
+  --ancho: 1160px;
+  --aire: clamp(3.5rem, 2rem + 5vw, 5.5rem);  /* 56px @375 · 88px desde 1120 */
+
+  /* --- formas ------------------------------------------------------------- */
+  --r-sm: 8px;
+  --r-md: 10px;
+  --r-lg: 14px;              /* TECHO. Un radio mayor sobre 1160px de ancho lee a
+                                app de móvil, no a documento */
+  --sombra: 0 1px 2px rgba(11, 25, 44, 0.04), 0 12px 32px -20px rgba(11, 25, 44, 0.18);
+
+  --rap: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/*
+ * Respaldo con métricas de Inter. Sin esto, mientras la fuente se descarga el titular se
+ * compone con Segoe UI —que es más ancha—, y al llegar Inter la maqueta SALTA porque el h1
+ * cambia de número de líneas. `size-adjust` iguala el ancho medio de carácter (Inter
+ * 0,4854em contra Segoe UI 0,5210em) y los overrides igualan la caja vertical.
+ */
+@font-face {
+  font-family: 'Inter respaldo';
+  src: local('Segoe UI Variable Text'), local('Segoe UI'), local('Roboto');
+  size-adjust: 93%;
+  ascent-override: 96.9%;
+  descent-override: 24.2%;
+  line-gap-override: 0%;
+}
+
+/* ---------------------------------------------------------------------- base */
+
+* { box-sizing: border-box; }
+
+/*
+ * `clip`, NUNCA `hidden`: `overflow-x: hidden` obliga al navegador a poner
+ * `overflow-y: auto`, y eso rompe el `position: sticky` de la cabecera sin decir nada.
+ */
+html, body { overflow-x: clip; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta-2);
+  font: 400 var(--t-cuerpo)/1.65 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 { color: var(--tinta); margin: 0; font-weight: 600; letter-spacing: -0.02em; }
+h1 { font-size: var(--t-h1); line-height: 1.06; letter-spacing: -0.035em; }
+h2 { font-size: var(--t-h2); line-height: 1.14; }
+h3 { font-size: var(--t-h3); line-height: 1.3; letter-spacing: -0.012em; }
+p  { margin: 0; }
+
+a { color: var(--acento-texto); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/*
+ * Un solo foco para todo el sitio, y visible sobre los DOS planos: el marino no puede
+ * llevar el mismo anillo que el blanco o desaparece.
+ */
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.banda-oscura :focus-visible { outline-color: var(--acento-claro); }
+
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Salto al contenido: existe para el teclado, no se ve con el ratón. */
+.saltar {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--marino);
+  color: #fff;
+  padding: var(--e3) var(--e5);
+  border-radius: 0 0 var(--r-sm) 0;
+}
+.saltar:focus { left: 0; }
+
+/* ---------------------------------------------------------------- rótulo mono */
+
+.rotulo {
+  font: 500 var(--t-mono)/1 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--tinta-3);
+  display: block;
+  margin-bottom: var(--e4);
+}
+.rotulo--acento { color: var(--acento-texto); }
+.banda-oscura .rotulo { color: var(--sobre-marino-2); }
+
+/* ------------------------------------------------------------------- iconos */
+
+/*
+ * Todos los iconos son SVG de trazo dibujados a mano en caja 24x24, trazo 1,5,
+ * `currentColor`. Ni un emoji en todo el sitio: el dueño lo pidió expresamente —«eso le
+ * hace ver como algo muy simple»— y en una página que existe para dar seriedad a una
+ * empresa, un emoji la quita.
+ */
+.i {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.i--sm { width: 18px; height: 18px; stroke-width: 1.6; }
+
+/* ---------------------------------------------------------------- cabecera */
+
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--linea);
+}
+/* Sin `backdrop-filter` el texto se leería sobre la página: fondo sólido de respaldo. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .cabecera { background: var(--fondo); }
+}
+
+.cabecera__fila {
+  display: flex;
+  align-items: center;
+  gap: var(--e5);
+  min-height: 64px;
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e3);
+  color: var(--tinta);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  font-size: 0.9375rem;
+  margin-right: auto;
+}
+.marca:hover { text-decoration: none; }
+.marca__mono { display: block; width: 28px; height: 28px; flex: none; }
+.marca__nombre { white-space: nowrap; }
+.marca__sac { color: var(--tinta-3); font-weight: 500; }
+
+/*
+ * La marca se ACORTA por partes en pantallas estrechas, y no es cosmético: medido a 375 px,
+ * «Connecta Digital Solutions S.A.C.» en `nowrap` con `margin-right: auto` empujaba el
+ * selector de idioma hasta x=395 — fuera de una pantalla de 375—. No aparecía barra
+ * horizontal porque `overflow-x: clip` la corta, así que el fallo era invisible: el botón EN
+ * simplemente no existía en el móvil, y nadie habría sabido por qué.
+ *
+ * Solo en la CABECERA. En el pie hay sitio de sobra y el nombre legal completo debe verse
+ * ahí siempre, igual que en la ficha de datos.
+ */
+@media (max-width: 560px) {
+  .cabecera .marca__sac { display: none; }
+  .cabecera .marca__nombre { font-size: 0.875rem; }
+}
+@media (max-width: 430px) {
+  .cabecera .marca__resto { display: none; }
+}
+
+.cabecera__nav { display: flex; gap: var(--e6); }
+.cabecera__nav a {
+  color: var(--tinta-2);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  padding-block: var(--e2);
+}
+.cabecera__nav a:hover { color: var(--tinta); text-decoration: none; }
+
+@media (max-width: 900px) {
+  /*
+   * El menú desaparece antes que se amontone. No se sustituye por un desplegable: son
+   * cuatro anclas de la misma página y el pie las repite todas, así que un botón de menú
+   * añadiría un mecanismo que puede fallar para llegar a donde ya se llega bajando.
+   */
+  .cabecera__nav { display: none; }
+}
+
+/* --------------------------------------------------------- selector idioma */
+
+.idioma {
+  display: inline-flex;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 999px;
+  padding: 2px;
+  background: var(--fondo);
+}
+.idioma button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--tinta-3);
+  font: 500 var(--t-mono)/1 var(--mono);
+  letter-spacing: 0.08em;
+  padding: 7px 11px;
+  border-radius: 999px;
+  transition: color 0.15s var(--rap), background-color 0.15s var(--rap);
+}
+.idioma button[aria-pressed='true'] {
+  background: var(--marino);
+  color: #fff;
+}
+
+/* -------------------------------------------------------------------- héroe */
+
+.heroe { padding-block: clamp(3.5rem, 2rem + 6vw, 6.5rem) var(--aire); }
+.heroe h1 { text-wrap: balance; max-width: 16ch; }
+.heroe__entradilla {
+  margin-top: var(--e6);
+  font-size: var(--t-entradilla);
+  line-height: 1.55;
+  max-width: 62ch;
+  color: var(--tinta-2);
+}
+.heroe__acciones { display: flex; flex-wrap: wrap; gap: var(--e3); margin-top: var(--e7); }
+
+/* -------------------------------------------------------------------- botón */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e2);
+  padding: 13px 22px;
+  border-radius: var(--r-md);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  border: 1px solid transparent;
+  transition: background-color 0.15s var(--rap), border-color 0.15s var(--rap);
+}
+.boton:hover { text-decoration: none; }
+
+/*
+ * EL azul relleno del sitio. Aparece una vez por pantalla y punto: si el botón principal,
+ * el selector de idioma y los iconos fueran todos azul sólido, no habría acento — habría
+ * fondo azul repartido.
+ */
+.boton--primario { background: var(--acento); color: #fff; }
+.boton--primario:hover { background: #0079bd; }
+
+.boton--fantasma {
+  border-color: var(--linea-fuerte);
+  color: var(--tinta);
+  background: var(--fondo);
+}
+.boton--fantasma:hover { border-color: var(--tinta-3); }
+
+.banda-oscura .boton--fantasma {
+  border-color: var(--linea-oscura);
+  color: #fff;
+  background: transparent;
+}
+.banda-oscura .boton--fantasma:hover { border-color: var(--sobre-marino-2); }
+
+/* -------------------------------------------------------------- credenciales */
+
+/*
+ * La franja de datos registrales, justo debajo del héroe y ANTES de cualquier discurso.
+ * Es deliberado: quien llega aquí a comprobar que la empresa existe —un revisor de tienda,
+ * un banco, un cliente nuevo— encuentra el RUC y la partida registral sin bajar. Los
+ * mismos datos vuelven completos en la ficha del final; esto es el resumen.
+ */
+.credenciales {
+  border-block: 1px solid var(--linea);
+  background: var(--fondo-2);
+}
+/*
+ * Los filetes se hacen con BORDES, nunca con `gap: 1px` sobre un fondo teñido.
+ * Es una lección cara de la web del producto: con `gap`, en un Windows al 125 % o al 150 %
+ * —que es lo normal en un portátil— unas separaciones se redondean a 1 px y otras a 2, y la
+ * rejilla queda visiblemente descuadrada sin que nadie sepa por qué. Un `border` de 1px se
+ * redondea igual en las cuatro celdas.
+ */
+.credenciales__fila {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.credenciales__celda {
+  padding: var(--e6) var(--e5);
+  border-left: 1px solid var(--linea);
+}
+.credenciales__celda:first-child { border-left: 0; }
+.credenciales dt {
+  font: 500 var(--t-mono)/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tinta-3);
+}
+.credenciales dd {
+  margin: var(--e3) 0 0;
+  color: var(--tinta);
+  font-weight: 600;
+  font-size: var(--t-celda);
+  letter-spacing: -0.01em;
+}
+.credenciales dd small { display: block; font-weight: 400; font-size: var(--t-micro); color: var(--tinta-3); margin-top: 2px; letter-spacing: 0; }
+
+/*
+ * Al pasar a dos columnas la regla de «sin borde el primero» deja de valer: quien no lleva
+ * filete izquierdo es el primero DE CADA FILA, y aparece uno horizontal entre filas.
+ */
+@media (max-width: 860px) {
+  .credenciales__fila { grid-template-columns: repeat(2, 1fr); }
+  .credenciales__celda:nth-child(odd) { border-left: 0; }
+  .credenciales__celda:nth-child(n + 3) { border-top: 1px solid var(--linea); }
+}
+@media (max-width: 460px) {
+  .credenciales__fila { grid-template-columns: 1fr; }
+  .credenciales__celda { border-left: 0; }
+  .credenciales__celda + .credenciales__celda { border-top: 1px solid var(--linea); }
+}
+
+/* ---------------------------------------------------------------- secciones */
+
+/*
+ * `scroll-margin-top` con el alto de la cabecera: sin esto, pulsar «Servicios» dejaba el
+ * rótulo de la sección DEBAJO de la barra fija, y el visitante aterrizaba en un sitio que
+ * parecía el medio de la sección anterior.
+ */
+.seccion[id], section[id] { scroll-margin-top: calc(64px + var(--e4)); }
+
+.seccion { padding-block: var(--aire); }
+.seccion--gris { background: var(--fondo-2); border-block: 1px solid var(--linea); }
+.seccion__cabeza { max-width: 62ch; margin-bottom: var(--e8); }
+.seccion__cabeza p { margin-top: var(--e4); font-size: var(--t-entradilla); line-height: 1.55; }
+
+/* ------------------------------------------------------------------ tarjetas */
+
+.rejilla-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--e5);
+}
+@media (max-width: 940px) { .rejilla-3 { grid-template-columns: 1fr; gap: var(--e4); } }
+
+.tarjeta {
+  background: var(--fondo);
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--r-lg);
+  padding: var(--e7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--e4);
+}
+.seccion--gris .tarjeta { box-shadow: var(--sombra); }
+
+/*
+ * El icono va en una caja tintada, no suelto: sin la caja, tres iconos de trazo sobre
+ * blanco a distinta altura de línea se leen como manchas y no como una serie.
+ */
+.tarjeta__icono {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  background: var(--acento-8);
+  border: 1px solid var(--acento-16);
+  color: var(--acento-texto);
+  display: grid;
+  place-items: center;
+}
+.tarjeta p { font-size: var(--t-celda); color: var(--tinta-2); }
+/*
+ * `margin-top: auto` empuja la lista al fondo de la tarjeta. Sin esto, las tres listas
+ * arrancaban a tres alturas distintas —porque los párrafos de arriba miden distinto— y tres
+ * bloques desalineados en una fila se leen como un descuido, no como una serie.
+ */
+.tarjeta__lista { margin: auto 0 0; padding: 0; list-style: none; display: grid; gap: var(--e2); padding-top: var(--e3); }
+.tarjeta__lista li {
+  display: flex;
+  gap: var(--e2);
+  align-items: flex-start;
+  font-size: var(--t-micro);
+  color: var(--tinta-3);
+}
+.tarjeta__lista .i { color: var(--acento-texto); margin-top: 1px; }
+
+/* ------------------------------------------------------------------ producto */
+
+.producto {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 1rem + 4vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 940px) { .producto { grid-template-columns: 1fr; } }
+
+.producto__cita {
+  margin: var(--e6) 0 0;
+  padding-left: var(--e5);
+  border-left: 2px solid var(--acento);
+  color: var(--tinta-2);
+  font-size: var(--t-entradilla);
+  line-height: 1.55;
+}
+
+/*
+ * El marco de la captura. La imagen es un pantallazo REAL de la aplicación —tomado contra
+ * una base de datos de prueba, así que los nombres que se ven son inventados y no hay dato
+ * de ningún cliente—. Se enseña dentro de un marco con barra de ventana para que se lea
+ * como lo que es: una app de escritorio, no una web.
+ */
+.marco {
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--marino);
+  box-shadow: var(--sombra);
+}
+.marco__barra {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px var(--e4);
+  background: var(--marino);
+  border-bottom: 1px solid var(--linea-oscura);
+}
+.marco__punto { width: 9px; height: 9px; border-radius: 50%; background: #2c405a; }
+.marco__titulo {
+  margin-left: var(--e3);
+  font: 500 var(--t-mono)/1 var(--mono);
+  color: var(--sobre-marino-2);
+  letter-spacing: 0.06em;
+}
+.marco img { width: 100%; display: block; }
+.pie-figura {
+  margin-top: var(--e3);
+  font-size: var(--t-micro);
+  color: var(--tinta-3);
+}
+
+/* --------------------------------------------------------------- banda oscura */
+
+.banda-oscura {
+  background: var(--marino);
+  color: var(--sobre-marino-2);
+}
+.banda-oscura h2, .banda-oscura h3 { color: var(--sobre-marino); }
+.banda-oscura a { color: var(--acento-claro); }
+
+/* ------------------------------------------------------------- ficha registral */
+
+/*
+ * La ficha de datos de la empresa. Es la sección por la que existe media página: un revisor
+ * de Apple o de Microsoft, o el analista que verifica la empresa, viene a comprobar que la
+ * razón social, el RUC y el domicilio de la web COINCIDEN con el registro público. Por eso
+ * va en su propia banda, con los rótulos en mono y los valores seleccionables, y por eso los
+ * datos salen de la ficha RUC de SUNAT y no de un texto de marketing.
+ *
+ * Lo que NO está aquí, y es a propósito: número de DNI, fecha de nacimiento y porcentaje de
+ * participación de los socios. Eso está en la ficha RUC y es dato personal; publicarlo no
+ * ayuda a ninguna verificación y expone a personas de verdad.
+ */
+/* Bordes, no `gap: 1px`: el mismo motivo que en `.credenciales__fila`. */
+.ficha {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--linea-oscura);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--marino-2);
+}
+.ficha__celda { padding: var(--e6); border-left: 1px solid var(--linea-oscura); }
+.ficha__celda:nth-child(odd) { border-left: 0; }
+.ficha__celda:nth-child(n + 3) { border-top: 1px solid var(--linea-oscura); }
+
+@media (max-width: 760px) {
+  .ficha { grid-template-columns: 1fr; }
+  .ficha__celda { border-left: 0; }
+  .ficha__celda + .ficha__celda { border-top: 1px solid var(--linea-oscura); }
+}
+.ficha dt {
+  font: 500 var(--t-mono)/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sobre-marino-2);
+}
+.ficha dd {
+  margin: var(--e3) 0 0;
+  color: var(--sobre-marino);
+  font-size: var(--t-celda);
+  font-weight: 500;
+}
+.ficha dd.mono { font-family: var(--mono); letter-spacing: 0.04em; font-weight: 500; }
+.ficha dd small { display: block; font-size: var(--t-micro); color: var(--sobre-marino-2); font-weight: 400; margin-top: var(--e1); }
+/*
+ * La aclaración de una celda mono vuelve a la tipografía de texto. `.mono` existe para que
+ * un identificador —RUC, partida— se lea cifra a cifra; una frase entera en monoespaciada
+ * se lee peor y además parecía un dato de sistema en vez de una nota.
+ */
+.ficha dd.mono small { font-family: var(--sans); letter-spacing: 0; }
+
+.contactos { display: grid; gap: var(--e4); margin-top: var(--e7); justify-items: start; }
+/*
+ * Hijos DIRECTOS. Sin el `>`, el <span> traducido que va dentro de la fila también se
+ * volvía `inline-flex` con su propio `gap`, y el texto quedaba separado del icono por dos
+ * huecos en vez de uno.
+ */
+.contactos > a, .contactos > span { display: inline-flex; align-items: center; gap: var(--e3); }
+.contactos .i { color: var(--acento-claro); }
+
+/* ---------------------------------------------------------------------- pie */
+
+.pie {
+  background: var(--marino);
+  color: var(--sobre-marino-2);
+  border-top: 1px solid var(--linea-oscura);
+  padding-block: var(--e8) var(--e7);
+  font-size: var(--t-micro);
+}
+.pie__rejilla {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: var(--e7);
+  padding-bottom: var(--e7);
+  border-bottom: 1px solid var(--linea-oscura);
+}
+@media (max-width: 760px) { .pie__rejilla { grid-template-columns: 1fr; gap: var(--e6); } }
+
+.pie h3 {
+  font: 500 var(--t-mono)/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sobre-marino-2);
+  margin-bottom: var(--e4);
+}
+.pie ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--e2); }
+.pie a { color: var(--sobre-marino); }
+.pie a:hover { color: var(--acento-claro); }
+.pie__legal { padding-top: var(--e6); display: grid; gap: var(--e2); }
+.pie__legal p { color: var(--sobre-marino-2); }
+
+/* ---------------------------------------------------------------- movimiento */
+
+/*
+ * La única animación del sitio: las secciones entran una vez, muy poco y muy rápido.
+ * Va con doble llave —`@supports` y `prefers-reduced-motion: no-preference`— porque
+ * `animation-timeline` todavía no está en todos los navegadores y porque quien pidió menos
+ * movimiento en su sistema no tiene por qué recibirlo aquí. Si algo de esto no se cumple,
+ * la página se queda quieta y completa, que es el estado correcto.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .aparece {
+      animation: aparecer linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 32%;
+    }
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ impresión */
+
+/*
+ * Se imprime, y no es un capricho: para una verificación de empresa a veces piden la web
+ * en PDF. Sin esto salía la banda marino en negro sólido, gastando tinta y dejando el texto
+ * blanco invisible en muchas impresoras.
+ */
+@media print {
+  .cabecera, .idioma, .heroe__acciones, .saltar { display: none; }
+  body, .banda-oscura, .pie, .ficha__celda, .marco, .marco__barra {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .banda-oscura h2, .ficha dt, .ficha dd, .pie a, .pie p { color: #000 !important; }
+  .ficha, .ficha__celda { border-color: #999 !important; }
+  a[href^='http']::after { content: ' (' attr(href) ')'; font-size: 10px; color: #444; }
+}

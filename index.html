@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-es="CONNECTA DIGITAL SOLUTIONS S.A.C. — Desarrollo de software en Lima, Perú" data-en="CONNECTA DIGITAL SOLUTIONS S.A.C. — Software development in Lima, Peru">CONNECTA DIGITAL SOLUTIONS S.A.C. — Desarrollo de software en Lima, Perú</title>
+<!--
+  Los <meta> se quedan en ESPAÑOL y no llevan data-es / data-en. No es un olvido:
+  `idioma.js` solo escribe `innerHTML`, y en un <meta> eso no hace nada porque el texto
+  vive en el atributo `content`. Además es lo correcto: los rastreadores no pulsan el
+  conmutador, y el idioma por defecto del sitio es el español.
+-->
+<meta name="description" content="CONNECTA DIGITAL SOLUTIONS S.A.C. (RUC 20615591221) es una empresa peruana de desarrollo de software con sede en Lima. Aplicaciones de escritorio a medida, automatización, integración de APIs y consultoría tecnológica. Desarrolladora de AutoTrade P2P.">
+<meta name="author" content="CONNECTA DIGITAL SOLUTIONS S.A.C.">
+<link rel="canonical" href="https://connectadigitalsolutions.com/">
+<link rel="icon" href="assets/marca.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0b192c">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://connectadigitalsolutions.com/">
+<meta property="og:site_name" content="CONNECTA DIGITAL SOLUTIONS S.A.C.">
+<meta property="og:title" content="CONNECTA DIGITAL SOLUTIONS S.A.C.">
+<meta property="og:description" content="Empresa peruana de desarrollo de software con sede en Lima. Aplicaciones de escritorio a medida, automatización e integración de APIs.">
+<meta property="og:locale" content="es_PE">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!--
+  DOS familias y DOS ficheros, ni uno más. Inter variable 400..700 cubre cuerpo, botones y
+  titulares con una sola descarga; IBM Plex Mono va con UN corte (500) porque en Google
+  Fonts no es variable y cada peso es un fichero aparte. Cada peso que se añada aquí es
+  peso de descarga en el móvil de alguien con datos contados.
+-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Inter:wght@400..700&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+<!--
+  Datos estructurados. No es adorno: cuando alguien verifica la empresa, esto es lo que
+  permite que un buscador y un revisor automático lean la razón social, el identificador
+  fiscal y el domicilio sin interpretar el diseño. Los valores son los MISMOS que se ven en
+  la ficha del final; si se cambia uno hay que cambiar el otro.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CONNECTA DIGITAL SOLUTIONS S.A.C.",
+  "legalName": "CONNECTA DIGITAL SOLUTIONS S.A.C.",
+  "url": "https://connectadigitalsolutions.com/",
+  "logo": "https://connectadigitalsolutions.com/assets/marca.svg",
+  "foundingDate": "2026-01-30",
+  "taxID": "20615591221",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Calle Marsella 255, Dpto. 4, Urb. Buenos Aires",
+    "addressLocality": "San Juan de Lurigancho",
+    "addressRegion": "Lima",
+    "addressCountry": "PE"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "contacto@connectadigitalsolutions.com",
+    "telephone": "+51940342693",
+    "availableLanguage": ["es", "en"]
+  }
+}
+</script>
+</head>
+<body>
+
+<a class="saltar" href="#contenido" data-es="Saltar al contenido" data-en="Skip to content">Saltar al contenido</a>
+
+<!--
+  Hoja de iconos. Todos son SVG de trazo dibujados a mano en caja 24x24, trazo 1,5,
+  `currentColor`. Ni un emoji en todo el sitio: el dueño lo pidió expresamente —«eso le hace
+  ver como algo muy simple»— y en una página cuyo trabajo es dar seriedad a una empresa, un
+  emoji se la quita.
+
+  Van como <symbol> y se usan con <use> para no repetir el mismo trazado nueve veces. Un
+  <svg><use></svg> es seguro donde `idioma.js` no lo toque: NUNCA dentro de un [data-es].
+-->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-codigo" viewBox="0 0 24 24">
+    <rect x="2.5" y="4" width="19" height="16" rx="2.5"></rect><path d="M2.5 8.5h19"></path>
+    <path d="M9.5 12.5 7.5 14.5l2 2M14.5 12.5l2 2-2 2"></path>
+  </symbol>
+  <symbol id="i-flujo" viewBox="0 0 24 24">
+    <circle cx="5.5" cy="6" r="2.5"></circle><circle cx="5.5" cy="18" r="2.5"></circle><circle cx="18.5" cy="12" r="2.5"></circle>
+    <path d="M8 6h4.5a3.5 3.5 0 0 1 3.5 3.5v.2M8 18h4.5a3.5 3.5 0 0 0 3.5-3.5v-.2"></path>
+  </symbol>
+  <symbol id="i-escudo" viewBox="0 0 24 24">
+    <path d="M12 2.75 4.5 6v6.2c0 4.2 3 7.4 7.5 9.05 4.5-1.65 7.5-4.85 7.5-9.05V6z"></path>
+    <path d="m9 12 2.2 2.2L15.2 10"></path>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></symbol>
+  <symbol id="i-correo" viewBox="0 0 24 24">
+    <rect x="2.5" y="5" width="19" height="14" rx="2.5"></rect><path d="m3.5 7.5 7.2 5.1a2.2 2.2 0 0 0 2.6 0l7.2-5.1"></path>
+  </symbol>
+  <symbol id="i-telefono" viewBox="0 0 24 24">
+    <path d="M8.3 3.5H5.6A2.1 2.1 0 0 0 3.5 5.8c.35 5.4 4.3 9.35 9.7 9.7a2.1 2.1 0 0 0 2.3-2.1v-2.7l-3.1-1-1.5 1.8a11.4 11.4 0 0 1-4.1-4.1L8.6 6z" transform="translate(2.2 2.2)"></path>
+  </symbol>
+  <symbol id="i-globo" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9.25"></circle><path d="M2.9 12h18.2"></path>
+    <path d="M12 2.75c2.4 2.6 3.6 5.75 3.6 9.25s-1.2 6.65-3.6 9.25c-2.4-2.6-3.6-5.75-3.6-9.25S9.6 5.35 12 2.75z"></path>
+  </symbol>
+  <symbol id="i-lugar" viewBox="0 0 24 24">
+    <path d="M12 21.25c4-4.2 6-7.65 6-10.35a6 6 0 1 0-12 0c0 2.7 2 6.15 6 10.35z"></path><circle cx="12" cy="10.6" r="2.3"></circle>
+  </symbol>
+  <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M4.5 12h14M13 6.5l5.5 5.5L13 17.5"></path></symbol>
+  <symbol id="i-externo" viewBox="0 0 24 24">
+    <path d="M13.5 4.5h6v6M19.5 4.5 11 13"></path>
+    <path d="M18 14.5v3.6a2.4 2.4 0 0 1-2.4 2.4H5.9a2.4 2.4 0 0 1-2.4-2.4V8.4A2.4 2.4 0 0 1 5.9 6h3.6"></path>
+  </symbol>
+</defs></svg>
+
+<header class="cabecera">
+  <div class="contenedor cabecera__fila">
+    <a class="marca" href="./">
+      <svg class="marca__mono" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M23.8 8.2a11 11 0 1 0 0 15.6" fill="none" stroke="#0b192c" stroke-width="2.6" stroke-linecap="round"></path>
+        <circle cx="23.8" cy="8.2" r="3.1" fill="#008dda"></circle>
+      </svg>
+      <span class="marca__nombre">Connecta<span class="marca__resto"> Digital Solutions</span> <span class="marca__sac">S.A.C.</span></span>
+    </a>
+
+    <nav class="cabecera__nav" data-aria-es="Secciones" data-aria-en="Sections" aria-label="Secciones">
+      <a href="#servicios" data-es="Servicios" data-en="Services">Servicios</a>
+      <a href="#producto" data-es="Producto" data-en="Product">Producto</a>
+      <a href="#nosotros" data-es="Nosotros" data-en="About">Nosotros</a>
+      <a href="#empresa" data-es="Datos de la empresa" data-en="Company details">Datos de la empresa</a>
+    </nav>
+
+    <div class="idioma" role="group" data-aria-es="Idioma" data-aria-en="Language" aria-label="Idioma">
+      <button type="button" data-idioma="es" aria-pressed="true">ES</button>
+      <button type="button" data-idioma="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- ------------------------------------------------------------------ héroe -->
+  <section class="heroe">
+    <div class="contenedor">
+      <span class="rotulo rotulo--acento" data-es="Empresa peruana de desarrollo de software" data-en="Peruvian software development company">Empresa peruana de desarrollo de software</span>
+      <h1 data-es="Construimos el software que su operación necesita." data-en="We build the software your operation needs.">Construimos el software que su operación necesita.</h1>
+      <p class="heroe__entradilla" data-es="<b>CONNECTA DIGITAL SOLUTIONS S.A.C.</b> diseña aplicaciones de escritorio, integra sistemas que no se hablan entre sí y automatiza el trabajo repetitivo, para que un equipo pequeño haga el trabajo de uno grande. Con sede en Lima, Perú." data-en="<b>CONNECTA DIGITAL SOLUTIONS S.A.C.</b> designs desktop applications, integrates systems that do not talk to each other and automates repetitive work, so a small team can do the work of a large one. Based in Lima, Peru."><b>CONNECTA DIGITAL SOLUTIONS S.A.C.</b> diseña aplicaciones de escritorio, integra sistemas que no se hablan entre sí y automatiza el trabajo repetitivo, para que un equipo pequeño haga el trabajo de uno grande. Con sede en Lima, Perú.</p>
+      <div class="heroe__acciones">
+        <a class="boton boton--primario" href="#producto">
+          <span data-es="Conocer AutoTrade P2P" data-en="See AutoTrade P2P">Conocer AutoTrade P2P</span>
+          <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-flecha"></use></svg>
+        </a>
+        <a class="boton boton--fantasma" href="#empresa">
+          <span data-es="Datos de la empresa" data-en="Company details">Datos de la empresa</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    La franja registral, ANTES de cualquier discurso. Es deliberado: quien llega aquí a
+    comprobar que la empresa existe —un revisor de una tienda de aplicaciones, un banco, un
+    cliente nuevo— encuentra el RUC y la partida sin bajar ni una pantalla. Los mismos datos
+    vuelven completos en la ficha del final; esto es el resumen.
+  -->
+  <section class="credenciales">
+    <div class="contenedor">
+      <dl class="credenciales__fila">
+        <div class="credenciales__celda">
+          <dt data-es="RUC" data-en="Tax ID (RUC)">RUC</dt>
+          <dd>20615591221 <small data-es="Sociedad Anónima Cerrada" data-en="Closely held corporation (S.A.C.)">Sociedad Anónima Cerrada</small></dd>
+        </div>
+        <div class="credenciales__celda">
+          <dt data-es="Partida registral" data-en="Registry entry">Partida registral</dt>
+          <dd>16160309 <small data-es="SUNARP · Lima" data-en="Public Registry (SUNARP) · Lima">SUNARP · Lima</small></dd>
+        </div>
+        <div class="credenciales__celda">
+          <dt data-es="Constituida" data-en="Incorporated">Constituida</dt>
+          <dd><span data-es="30 de enero de 2026" data-en="30 January 2026">30 de enero de 2026</span> <small data-es="Inscrita en Registros Públicos" data-en="Registered with the Public Registry">Inscrita en Registros Públicos</small></dd>
+        </div>
+        <div class="credenciales__celda">
+          <dt data-es="Sede" data-en="Head office">Sede</dt>
+          <dd><span data-es="Lima, Perú" data-en="Lima, Peru">Lima, Perú</span> <small data-es="San Juan de Lurigancho" data-en="San Juan de Lurigancho district">San Juan de Lurigancho</small></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- -------------------------------------------------------------- servicios -->
+  <section class="seccion seccion--gris" id="servicios">
+    <div class="contenedor">
+      <div class="seccion__cabeza aparece">
+        <span class="rotulo" data-es="Qué hacemos" data-en="What we do">Qué hacemos</span>
+        <h2 data-es="Tres cosas, y las tres a fondo." data-en="Three things, and all three properly.">Tres cosas, y las tres a fondo.</h2>
+        <p data-es="No vendemos catálogo. Trabajamos en el terreno donde un error cuesta dinero de verdad: herramientas que un negocio abre cada mañana y de las que depende para cobrar, atender y declarar." data-en="We do not sell a catalogue. We work where a mistake costs real money: tools a business opens every morning and depends on to get paid, serve customers and file taxes.">No vendemos catálogo. Trabajamos en el terreno donde un error cuesta dinero de verdad: herramientas que un negocio abre cada mañana y de las que depende para cobrar, atender y declarar.</p>
+      </div>
+
+      <div class="rejilla-3">
+        <article class="tarjeta aparece">
+          <div class="tarjeta__icono"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-codigo"></use></svg></div>
+          <h3 data-es="Desarrollo de software a medida" data-en="Custom software development">Desarrollo de software a medida</h3>
+          <p data-es="Aplicaciones de escritorio para Windows, herramientas internas y plataformas web. Del primer boceto al instalador firmado, con pruebas automáticas que se ejecutan en cada cambio." data-en="Desktop applications for Windows, internal tools and web platforms. From the first sketch to the signed installer, with automated tests running on every change.">Aplicaciones de escritorio para Windows, herramientas internas y plataformas web. Del primer boceto al instalador firmado, con pruebas automáticas que se ejecutan en cada cambio.</p>
+          <ul class="tarjeta__lista">
+            <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span data-es="Escritorio Windows y aplicaciones web" data-en="Windows desktop and web applications">Escritorio Windows y aplicaciones web</span></li>
+            <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span data-es="Bases de datos locales y sincronización" data-en="Local databases and synchronisation">Bases de datos locales y sincronización</span></li>
+            <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span data-es="Empaquetado y distribución" data-en="Packaging and distribution">Empaquetado y distribución</span></li>
+          </ul>
+        </article>
+
+        <article class="tarjeta aparece">
+          <div class="tarjeta__icono"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-flujo"></use></svg></div>
+          <h3 data-es="Automatización e integración" data-en="Automation and integration">Automatización e integración</h3>
+          <p data-es="Conectamos sistemas que no se hablan entre sí: APIs, hojas de cálculo, facturación electrónica. El trabajo repetitivo deja de hacerlo una persona y pasa a hacerlo el programa, con registro de todo lo que ocurre." data-en="We connect systems that do not talk to each other: APIs, spreadsheets, electronic invoicing. Repetitive work stops being a person's job and becomes the program's, with a log of everything that happens.">Conectamos sistemas que no se hablan entre sí: APIs, hojas de cálculo, facturación electrónica. El trabajo repetitivo deja de hacerlo una persona y pasa a hacerlo el programa, con registro de todo lo que ocurre.</p>
+          <ul class="tarjeta__lista">
+            <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span data-es="Integración de APIs REST y WebSocket" data-en="REST and WebSocket API integration">Integración de APIs REST y WebSocket</span></li>
+            <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span data-es="Exportación a Excel y sistemas contables" data-en="Export to Excel and accounting systems">Exportación a Excel y sistemas contables</span></li>
+            <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span data-es="Facturación electrónica SUNAT" data-en="SUNAT electronic invoicing (Peru)">Facturación electrónica SUNAT</span></li>
+          </ul>
+        </article>
+
+        <article class="tarjeta aparece">
+          <div class="tarjeta__icono"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-escudo"></use></svg></div>
+          <h3 data-es="Consultoría tecnológica" data-en="Technology consulting">Consultoría tecnológica</h3>
+          <p data-es="Arquitectura, seguridad de la información y acompañamiento técnico para equipos que necesitan decidir bien una vez, en lugar de rehacerlo tres veces. Revisamos lo que ya existe antes de proponer construir nada." data-en="Architecture, information security and technical guidance for teams that need to decide well once instead of rebuilding three times. We review what already exists before proposing to build anything.">Arquitectura, seguridad de la información y acompañamiento técnico para equipos que necesitan decidir bien una vez, en lugar de rehacerlo tres veces. Revisamos lo que ya existe antes de proponer construir nada.</p>
+          <ul class="tarjeta__lista">
+            <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span data-es="Arquitectura de sistemas" data-en="Systems architecture">Arquitectura de sistemas</span></li>
+            <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span data-es="Cifrado y custodia de credenciales" data-en="Encryption and credential storage">Cifrado y custodia de credenciales</span></li>
+            <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span data-es="Auditoría de código y de dependencias" data-en="Code and dependency audits">Auditoría de código y de dependencias</span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- --------------------------------------------------------------- producto -->
+  <section class="seccion" id="producto">
+    <div class="contenedor">
+      <div class="producto">
+        <div class="aparece">
+          <span class="rotulo rotulo--acento" data-es="Producto propio" data-en="Our own product">Producto propio</span>
+          <h2>AutoTrade P2P</h2>
+          <p style="margin-top:var(--e5)" data-es="Nuestro producto insignia: una aplicación de escritorio para Windows que asiste a comerciantes de plataformas de intercambio entre particulares. Responde el chat de sus operaciones con plantillas que ellos mismos escriben, mantiene un historial completo y exportable, y deja los datos listos para facturar." data-en="Our flagship product: a Windows desktop application that assists merchants on peer-to-peer exchange platforms. It answers their order chat with templates they write themselves, keeps a complete exportable history, and leaves the data ready for invoicing.">Nuestro producto insignia: una aplicación de escritorio para Windows que asiste a comerciantes de plataformas de intercambio entre particulares. Responde el chat de sus operaciones con plantillas que ellos mismos escriben, mantiene un historial completo y exportable, y deja los datos listos para facturar.</p>
+          <p class="producto__cita" data-es="Todo ocurre en el ordenador del usuario. No hay servidor nuestro, no hay cuenta que crear, y ningún dato de sus clientes sale de su equipo." data-en="Everything happens on the user's own computer. There is no server of ours, no account to create, and no customer data ever leaves their machine.">Todo ocurre en el ordenador del usuario. No hay servidor nuestro, no hay cuenta que crear, y ningún dato de sus clientes sale de su equipo.</p>
+          <div class="heroe__acciones">
+            <a class="boton boton--fantasma" href="https://autotradep2p.com/" rel="noopener">
+              <span data-es="Ver autotradep2p.com" data-en="Visit autotradep2p.com">Ver autotradep2p.com</span>
+              <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-externo"></use></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="aparece">
+          <figure style="margin:0">
+            <div class="marco">
+              <div class="marco__barra">
+                <span class="marco__punto"></span><span class="marco__punto"></span><span class="marco__punto"></span>
+                <span class="marco__titulo">AutoTrade P2P</span>
+              </div>
+              <img src="assets/autotrade-es.png" width="2732" height="1536" loading="lazy" decoding="async"
+                   data-img-es="assets/autotrade-es.png" data-img-en="assets/autotrade-en.png"
+                   data-alt-es="Pantalla de historial de órdenes de AutoTrade P2P" data-alt-en="Order history screen of AutoTrade P2P"
+                   alt="Pantalla de historial de órdenes de AutoTrade P2P">
+            </div>
+            <figcaption class="pie-figura" data-es="Pantalla de historial de AutoTrade P2P. Los datos visibles proceden de una base de pruebas: no corresponden a ninguna persona real." data-en="AutoTrade P2P order history screen. The visible data comes from a test database and does not correspond to any real person.">Pantalla de historial de AutoTrade P2P. Los datos visibles proceden de una base de pruebas: no corresponden a ninguna persona real.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --------------------------------------------------------------- nosotros -->
+  <section class="seccion seccion--gris" id="nosotros">
+    <div class="contenedor">
+      <div class="seccion__cabeza aparece">
+        <span class="rotulo" data-es="Nosotros" data-en="About us">Nosotros</span>
+        <h2 data-es="Una empresa pequeña que entrega cosas terminadas." data-en="A small company that ships finished things.">Una empresa pequeña que entrega cosas terminadas.</h2>
+        <p data-es="CONNECTA DIGITAL SOLUTIONS S.A.C. se constituyó en Lima en enero de 2026 y está inscrita en los Registros Públicos del Perú. Trabajamos en un terreno concreto: herramientas que un negocio usa a diario y que no se pueden permitir fallar, porque detrás hay dinero, clientes y obligaciones tributarias." data-en="CONNECTA DIGITAL SOLUTIONS S.A.C. was incorporated in Lima in January 2026 and is registered with the Peruvian Public Registry. We work in a specific field: tools a business uses daily and that cannot be allowed to fail, because there is money, customers and tax obligations behind them.">CONNECTA DIGITAL SOLUTIONS S.A.C. se constituyó en Lima en enero de 2026 y está inscrita en los Registros Públicos del Perú. Trabajamos en un terreno concreto: herramientas que un negocio usa a diario y que no se pueden permitir fallar, porque detrás hay dinero, clientes y obligaciones tributarias.</p>
+      </div>
+
+      <div class="rejilla-3">
+        <article class="tarjeta aparece">
+          <h3 data-es="El dato manda" data-en="Measurements decide">El dato manda</h3>
+          <p data-es="Cada decisión técnica sale de una medición, no de una suposición. Cuando algo se decide por una prueba, la prueba queda escrita al lado para que dentro de un año se sepa por qué." data-en="Every technical decision comes from a measurement, not an assumption. When something is decided by a test, the test is written down beside it so that a year later anyone knows why.">Cada decisión técnica sale de una medición, no de una suposición. Cuando algo se decide por una prueba, la prueba queda escrita al lado para que dentro de un año se sepa por qué.</p>
+        </article>
+        <article class="tarjeta aparece">
+          <h3 data-es="Los datos se quedan donde están" data-en="Data stays where it is">Los datos se quedan donde están</h3>
+          <p data-es="Diseñamos para que la información sensible no salga del equipo del cliente salvo que el trabajo lo exija. Menos datos en tránsito es menos superficie que proteger, y menos que explicar." data-en="We design so that sensitive information does not leave the client's machine unless the job requires it. Less data in transit means less surface to protect, and less to explain.">Diseñamos para que la información sensible no salga del equipo del cliente salvo que el trabajo lo exija. Menos datos en tránsito es menos superficie que proteger, y menos que explicar.</p>
+        </article>
+        <article class="tarjeta aparece">
+          <h3 data-es="Entregamos terminado" data-en="We deliver finished work">Entregamos terminado</h3>
+          <p data-es="Una función a medias es una función que alguien va a usar mal. Preferimos entregar menos y que lo entregado aguante el uso real desde el primer día." data-en="A half-finished feature is a feature someone will use wrongly. We prefer to deliver less and have what we deliver hold up to real use from day one.">Una función a medias es una función que alguien va a usar mal. Preferimos entregar menos y que lo entregado aguante el uso real desde el primer día.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    ---------------------------------------------------------------- la empresa
+
+    La sección por la que existe media página. Un revisor de una tienda de aplicaciones, o el
+    analista que verifica la empresa, viene a comprobar que la razón social, el RUC y el
+    domicilio de la web COINCIDEN con el registro público. Por eso los datos salen de la
+    ficha RUC de SUNAT y no de un texto de marketing.
+
+    Lo que NO está aquí, a propósito: número de DNI, fecha de nacimiento y porcentaje de
+    participación de los socios. Eso está en la ficha RUC, es dato personal, no ayuda a
+    ninguna verificación y expone a personas de verdad.
+  -->
+  <section class="seccion banda-oscura" id="empresa">
+    <div class="contenedor">
+      <div class="seccion__cabeza aparece">
+        <span class="rotulo" data-es="Identificación" data-en="Identification">Identificación</span>
+        <h2 data-es="Datos de la empresa" data-en="Company details">Datos de la empresa</h2>
+        <p data-es="Los siguientes datos coinciden con el Registro Único de Contribuyentes (RUC) de la SUNAT y con la partida inscrita en los Registros Públicos del Perú." data-en="The following details match the Peruvian taxpayer register (RUC, SUNAT) and the entry recorded in the Peruvian Public Registry.">Los siguientes datos coinciden con el Registro Único de Contribuyentes (RUC) de la SUNAT y con la partida inscrita en los Registros Públicos del Perú.</p>
+      </div>
+
+      <dl class="ficha aparece">
+        <div class="ficha__celda">
+          <dt data-es="Razón social" data-en="Legal name">Razón social</dt>
+          <dd>CONNECTA DIGITAL SOLUTIONS S.A.C.</dd>
+        </div>
+        <div class="ficha__celda">
+          <dt data-es="Tipo de sociedad" data-en="Legal form">Tipo de sociedad</dt>
+          <dd data-es="Sociedad Anónima Cerrada (S.A.C.)" data-en="Sociedad Anónima Cerrada — closely held corporation">Sociedad Anónima Cerrada (S.A.C.)</dd>
+        </div>
+        <div class="ficha__celda">
+          <dt data-es="RUC" data-en="Taxpayer number (RUC)">RUC</dt>
+          <dd class="mono">20615591221</dd>
+        </div>
+        <div class="ficha__celda">
+          <dt data-es="Partida registral" data-en="Public Registry entry">Partida registral</dt>
+          <dd class="mono">16160309<small data-es="Inscrita el 30 de enero de 2026 — SUNARP, Lima" data-en="Recorded on 30 January 2026 — SUNARP, Lima">Inscrita el 30 de enero de 2026 — SUNARP, Lima</small></dd>
+        </div>
+        <div class="ficha__celda">
+          <dt data-es="Domicilio fiscal" data-en="Registered address">Domicilio fiscal</dt>
+          <dd>Calle Marsella 255, Dpto. 4<small data-es="Urb. Buenos Aires, San Juan de Lurigancho, Lima, Perú" data-en="Urb. Buenos Aires, San Juan de Lurigancho, Lima, Peru">Urb. Buenos Aires, San Juan de Lurigancho, Lima, Perú</small></dd>
+        </div>
+        <!--
+          Se listan las TRES actividades tal como están inscritas, sin decir cuál es la
+          principal. No es un adorno: en la ficha RUC la principal es la 6499 y las de
+          informática son las secundarias, así que titular aquí «6201 — Programación
+          informática» sería decir algo que el registro público no dice. Un revisor que
+          compare las dos fuentes lo ve, y eso es exactamente lo que se cuenta como
+          representación inexacta. Listadas todas, la web y el registro coinciden.
+        -->
+        <div class="ficha__celda">
+          <dt data-es="Actividades registradas (CIIU)" data-en="Registered activities (ISIC)">Actividades registradas (CIIU)</dt>
+          <dd class="mono" data-es="6201 · 6202 · 6499<small>Programación informática · Consultoría de informática y gestión de instalaciones informáticas · Otras actividades de servicios financieros</small>" data-en="6201 · 6202 · 6499<small>Computer programming · Computer consultancy and facilities management · Other financial service activities</small>">6201 · 6202 · 6499<small>Programación informática · Consultoría de informática y gestión de instalaciones informáticas · Otras actividades de servicios financieros</small></dd>
+        </div>
+      </dl>
+
+      <div class="contactos" id="contacto">
+        <a href="mailto:contacto@connectadigitalsolutions.com">
+          <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-correo"></use></svg>
+          <span>contacto@connectadigitalsolutions.com</span>
+        </a>
+        <a href="tel:+51940342693">
+          <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-telefono"></use></svg>
+          <span>+51 940 342 693</span>
+        </a>
+        <a href="https://autotradep2p.com/" rel="noopener">
+          <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-globo"></use></svg>
+          <span>autotradep2p.com</span>
+        </a>
+        <span>
+          <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-lugar"></use></svg>
+          <span data-es="Lima, Perú — horario GMT-5" data-en="Lima, Peru — GMT-5">Lima, Perú — horario GMT-5</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__rejilla">
+      <div>
+        <a class="marca" href="./" style="margin-bottom:var(--e4)">
+          <svg class="marca__mono" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M23.8 8.2a11 11 0 1 0 0 15.6" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"></path>
+            <circle cx="23.8" cy="8.2" r="3.1" fill="#4fb3e8"></circle>
+          </svg>
+          <span class="marca__nombre" style="color:#fff">Connecta<span class="marca__resto"> Digital Solutions</span> <span class="marca__sac" style="color:var(--sobre-marino-2)">S.A.C.</span></span>
+        </a>
+        <p data-es="Empresa peruana de desarrollo de software. Aplicaciones de escritorio a medida, automatización, integración de APIs y consultoría tecnológica." data-en="Peruvian software development company. Custom desktop applications, automation, API integration and technology consulting.">Empresa peruana de desarrollo de software. Aplicaciones de escritorio a medida, automatización, integración de APIs y consultoría tecnológica.</p>
+      </div>
+
+      <div>
+        <h3 data-es="Secciones" data-en="Sections">Secciones</h3>
+        <ul>
+          <li><a href="#servicios" data-es="Servicios" data-en="Services">Servicios</a></li>
+          <li><a href="#producto" data-es="Producto" data-en="Product">Producto</a></li>
+          <li><a href="#nosotros" data-es="Nosotros" data-en="About">Nosotros</a></li>
+          <li><a href="#empresa" data-es="Datos de la empresa" data-en="Company details">Datos de la empresa</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 data-es="Contacto y legal" data-en="Contact and legal">Contacto y legal</h3>
+        <ul>
+          <li><a href="mailto:contacto@connectadigitalsolutions.com">contacto@connectadigitalsolutions.com</a></li>
+          <li><a href="tel:+51940342693">+51 940 342 693</a></li>
+          <li><a href="privacidad.html" data-es="Política de privacidad" data-en="Privacy policy">Política de privacidad</a></li>
+          <li><a href="https://autotradep2p.com/" rel="noopener">autotradep2p.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pie__legal">
+      <p>© 2026 CONNECTA DIGITAL SOLUTIONS S.A.C. <span data-es="Todos los derechos reservados." data-en="All rights reserved.">Todos los derechos reservados.</span></p>
+      <!--
+        Dice «es un producto de», NO «es una marca registrada de». La diferencia no es de
+        estilo: afirmar un registro de marca que todavía no está concedido es una declaración
+        falsa sobre la empresa, y es exactamente el tipo de frase que una tienda de
+        aplicaciones marca como representación inexacta. Cuando INDECOPI conceda el registro,
+        esta línea se cambia y se pone el número de certificado.
+      -->
+      <p data-es="AutoTrade P2P es un producto de CONNECTA DIGITAL SOLUTIONS S.A.C. RUC 20615591221 · Lima, Perú." data-en="AutoTrade P2P is a product of CONNECTA DIGITAL SOLUTIONS S.A.C. Taxpayer number (RUC) 20615591221 · Lima, Peru.">AutoTrade P2P es un producto de CONNECTA DIGITAL SOLUTIONS S.A.C. RUC 20615591221 · Lima, Perú.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/idioma.js"></script>
+</body>
+</html>
