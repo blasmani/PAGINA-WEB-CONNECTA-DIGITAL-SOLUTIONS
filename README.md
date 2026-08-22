@@ -123,8 +123,24 @@ Quien viene a verificar encuentra el RUC y la partida sin bajar ni una pantalla.
 en una hoja de `<symbol>` al principio del `<body>`.
 
 **Todos los contrastes están medidos, no estimados**, y están escritos al lado de cada color
-en `styles.css`. El cian de la propuesta (`#008DDA`) da 3,61:1 sobre blanco: vale para
-dibujar y **no** vale para texto, así que hay dos azules y no uno.
+en `styles.css`. El cian de la propuesta (`#008DDA`) da 3,61:1 sobre blanco, así que hay
+**tres** azules y no uno, y la diferencia entre ellos no es estética:
+
+| Token | Valor | Para qué | Medido |
+|---|---|---|---|
+| `--acento` | `#008dda` | trazos y bordes (objetos gráficos, WCAG 1.4.11 pide 3:1) | 3,61:1 |
+| `--acento-texto` | `#0a6ca6` | todo texto azul (1.4.3 pide 4,5:1) | 5,66:1 |
+| `--acento-relleno` | `#0a6ca6` | fondo del botón primario, con texto blanco encima | 5,66:1 |
+
+El botón primario nació con `--acento` de fondo y era un fallo: la razón de contraste es la
+misma se use el color como tinta o como fondo, así que blanco sobre `#008dda` son los mismos
+3,61:1. Lo peor era que su `:hover` (`#0079bd`, 4,70:1) **sí** cumplía — el botón solo era
+accesible mientras el ratón estaba encima, y en un móvil no hay ratón nunca.
+
+Lo mismo pasaba con los bordes: `--linea-fuerte` (1,52:1) vale para el contorno de un panel,
+que no es un control, pero identificaba el **botón fantasma**, cuyo borde es lo único que lo
+distingue del fondo —no tiene relleno y su texto es del mismo color que los titulares—. Por
+eso existe `--linea-control` (`#7d8b9c`, 3,47:1), solo para controles.
 
 ### La regla que rompe la página sin dar ningún error
 
@@ -138,7 +154,20 @@ hermano del `<span>` traducido, jamás dentro.**
 <!-- MAL  --> <li data-es="…" data-en="…"><svg>…</svg>texto</li>
 ```
 
-Comprobado en el navegador: 21 `<svg>` antes de cambiar de idioma, 21 después y 21 al volver.
+Comprobado en el navegador: 21 `<svg>` antes de cambiar de idioma, 21 después y 21 al volver,
+y 0 `<svg>` dentro de un `[data-es]` en las tres páginas.
+
+### Lo demás que se comprobó midiendo
+
+| Comprobación | Resultado |
+|---|---|
+| Traducción completa (104 elementos en tres páginas) | 0 con `data-es` y sin `data-en` |
+| Desbordamiento horizontal, 2 páginas × 11 anchos de 320 a 2560 px | 0 problemas |
+| Contraste del botón primario | 5,66:1 |
+| Contraste del borde de los controles | 3,47:1 |
+| Al imprimir: 10 piezas de las bandas oscuras | las 10 en negro sobre blanco, 21:1 |
+| Alineación de `privacidad.html` con cabecera y pie | desfase 0 px (eran 215) |
+| Anclas rotas y `<use>` sin `<symbol>` | ninguno |
 
 ### Por qué `404.html` usa rutas absolutas
 

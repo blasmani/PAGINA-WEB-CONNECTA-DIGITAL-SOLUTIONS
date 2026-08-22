@@ -19,7 +19,18 @@
    * rejilla de la portada no le sirve: aquí lo que importa es la medida de línea.
    */
   .legal { padding-block: var(--aire); }
-  .legal__cuerpo { max-width: 68ch; }
+  /*
+   * La medida de linea va en los HIJOS. Puesta en `.legal__cuerpo`, que ademas es
+   * `.contenedor` con sus margenes automaticos, lo que se centraba era el bloque
+   * entero: medido a 1265 px de viewport, el texto empezaba en x=300 mientras la
+   * marca de la cabecera y el pie seguian en x=85. Un desfase de 215 px que hacia
+   * parecer que la pagina legal era de otro sitio.
+   */
+  .legal__cuerpo > * { max-width: 68ch; }
+  /* El correo tiene que poder partirse aqui tambien: ver `.contactos` en la hoja. */
+  .legal a { overflow-wrap: anywhere; }
+  .legal code { font: 500 0.9em var(--mono); background: var(--fondo-2);
+    border: 1px solid var(--linea); border-radius: 4px; padding: 1px 5px; }
   .legal h2 { font-size: 1.375rem; margin-top: var(--e8); }
   .legal h2:first-of-type { margin-top: var(--e7); }
   .legal p { margin-top: var(--e4); }
@@ -73,10 +84,11 @@
     <p data-es="Nada. <b>connectadigitalsolutions.com</b> es un sitio estático: no tiene formularios, no tiene cuentas de usuario, no instala cookies y no lleva ningún sistema de analítica, seguimiento ni publicidad. No sabemos quién lo visita." data-en="Nothing. <b>connectadigitalsolutions.com</b> is a static site: it has no forms, no user accounts, sets no cookies and carries no analytics, tracking or advertising. We do not know who visits it.">Nada. <b>connectadigitalsolutions.com</b> es un sitio estático: no tiene formularios, no tiene cuentas de usuario, no instala cookies y no lleva ningún sistema de analítica, seguimiento ni publicidad. No sabemos quién lo visita.</p>
 
     <h2 data-es="Lo que sí ocurre, y conviene decirlo" data-en="What does happen, and is worth saying">Lo que sí ocurre, y conviene decirlo</h2>
-    <p data-es="Dos cosas técnicas escapan a lo anterior y sería deshonesto callarlas:" data-en="Two technical things fall outside the above and it would be dishonest to leave them out:">Dos cosas técnicas escapan a lo anterior y sería deshonesto callarlas:</p>
+    <p data-es="Tres cosas técnicas escapan a lo anterior y sería deshonesto callarlas:" data-en="Three technical things fall outside the above and it would be dishonest to leave them out:">Tres cosas técnicas escapan a lo anterior y sería deshonesto callarlas:</p>
     <ul>
-      <li data-es="<b>Alojamiento.</b> Este sitio se sirve desde GitHub Pages. Como cualquier servidor web, GitHub registra la dirección IP y el navegador de quien pide una página. Ese registro es suyo y se rige por su propia política de privacidad." data-en="<b>Hosting.</b> This site is served from GitHub Pages. Like any web server, GitHub logs the IP address and browser of whoever requests a page. Those logs are theirs and are governed by their own privacy policy."><b>Alojamiento.</b> Este sitio se sirve desde GitHub Pages. Como cualquier servidor web, GitHub registra la dirección IP y el navegador de quien pide una página. Ese registro es suyo y se rige por su propia política de privacidad.</li>
+      <li data-es="<b>Alojamiento.</b> Este sitio se sirve desde GitHub Pages. Como cualquier servidor web, GitHub registra la dirección IP y el navegador de quien pide una página. Ese registro pertenece a GitHub y queda sujeto a su propia política de privacidad." data-en="<b>Hosting.</b> This site is served from GitHub Pages. Like any web server, GitHub logs the IP address and browser of whoever requests a page. Those logs are theirs and are governed by their own privacy policy."><b>Alojamiento.</b> Este sitio se sirve desde GitHub Pages. Como cualquier servidor web, GitHub registra la dirección IP y el navegador de quien pide una página. Ese registro pertenece a GitHub y queda sujeto a su propia política de privacidad.</li>
       <li data-es="<b>Tipografías.</b> Las fuentes se descargan de Google Fonts, lo que implica una petición a un servidor de Google desde su navegador. No se envía ningún dato añadido por nuestra parte." data-en="<b>Fonts.</b> Typefaces are downloaded from Google Fonts, which means your browser makes a request to a Google server. No additional data is sent by us."><b>Tipografías.</b> Las fuentes se descargan de Google Fonts, lo que implica una petición a un servidor de Google desde su navegador. No se envía ningún dato añadido por nuestra parte.</li>
+      <li data-es="<b>Su idioma.</b> Este sitio guarda en el almacenamiento local de su navegador, bajo la clave <code>connecta-idioma</code>, el idioma con el que se le muestra la página —el que usted elija con el conmutador ES / EN, o el español por defecto si no elige— para que la próxima visita salga igual. No es una cookie, no viaja a ningún servidor, no identifica a nadie y se elimina borrando los datos del sitio en su navegador." data-en="<b>Your language.</b> This site stores one key in your browser’s local storage, <code>connecta-idioma</code>, holding the language the page is shown in —the one you pick with the ES / EN switch, or Spanish by default if you pick none— so your next visit looks the same. It is not a cookie, it never travels to any server, it identifies nobody, and it is removed by clearing this site’s data in your browser."><b>Su idioma.</b> Este sitio guarda en el almacenamiento local de su navegador, bajo la clave <code>connecta-idioma</code>, el idioma con el que se le muestra la página —el que usted elija con el conmutador ES / EN, o el español por defecto si no elige— para que la próxima visita salga igual. No es una cookie, no viaja a ningún servidor, no identifica a nadie y se elimina borrando los datos del sitio en su navegador.</li>
     </ul>
 
     <h2 data-es="Si nos escribe" data-en="If you write to us">Si nos escribe</h2>
