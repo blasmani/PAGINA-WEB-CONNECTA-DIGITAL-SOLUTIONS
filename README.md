@@ -15,83 +15,150 @@ CNAME             connectadigitalsolutions.com
 
 ---
 
-## ANTES DE PUBLICAR: lo que hay que decidir
+## De dónde sale cada dato
 
-Nada de la web está inventado salvo lo que aparece en esta lista. Los datos registrales
-salen de la **ficha RUC de la SUNAT del 21/08/2026**, no de un texto de marketing.
+Ninguna cifra de esta web está inventada. Cada una tiene una fuente, y las fuentes **no
+siempre coinciden entre sí**, así que aquí queda escrito cuál gana y por qué.
 
-### 1. El correo `contacto@connectadigitalsolutions.com` todavía no existe
+| Fuente | Fecha | Qué aporta |
+|---|---|---|
+| Ficha RUC de la SUNAT | 21/08/2026 | RUC, partida, actividades CIIU, domicilio normalizado |
+| Escritura pública de constitución | 11/02/2026 | razón social, objeto social, capital, socios, gerente, domicilio literal |
+| El dueño, por escrito | 21/08/2026 | teléfono comercial y correo de contacto |
 
-Es el único dato **ficticio** de la página, y aparece en cinco sitios: la ficha de datos, el
-pie, los datos estructurados de `<head>` y dos veces en `privacidad.html`.
+### La dirección: manda la escritura, no la SUNAT
 
-La propuesta original decía `anahiytiti@connectadigitalsolutions.com`. Se cambió a un buzón
-de función por dos razones: el nombre personal no tiene por qué estar a la vista en una web
-pública, y un correo de rol sobrevive a que la persona cambie de puesto. Si se prefiere el
-otro, es buscar y reemplazar.
+La escritura dice **«JR. MARSELLA 255 INT. PISO 4»** y **«ASOC. PRO VIVIENDA BUENOS AIRES»**.
+La ficha RUC lo traduce a su propia taxonomía —«CAL. MARSELLA», «URB. BUENOS AIRES»,
+«Dpto 4»— porque sus formularios solo admiten esas abreviaturas. No son dos direcciones
+distintas: es la misma escrita en dos sistemas. La web usa la de la escritura, que es el
+documento constitutivo, **y añade el distrito** (San Juan de Lurigancho), que dicen los dos y
+que es lo primero que busca quien verifica.
 
-Hace falta crear el buzón en el dominio antes de publicar. **Un correo del dominio propio no
-es opcional para lo que viene después**: la verificación de cuenta Company de Microsoft y la
-de Apple no aceptan Gmail.
+### La fecha de constitución NO se publica, y es a propósito
 
-### 2. Hay DOS teléfonos distintos y hay que elegir uno
+Hay una contradicción real entre dos documentos oficiales:
 
-| Fuente | Número |
-|---|---|
-| Ficha RUC de la SUNAT | **940 342 693** |
-| La propuesta de diseño | 973 060 599 |
+- La ficha RUC da como **«Fecha Inscripción RR.PP.» el 30/01/2026**.
+- La **escritura pública lleva fecha del 11/02/2026**, sus firmas son del 11/02/2026 y el
+  testimonio se expidió el 19/02/2026.
 
-La web usa **el de la SUNAT**, porque quien verifica la empresa compara la web contra el
-registro público y un número que no coincide es una discrepancia gratuita. Si el bueno es el
-otro, lo correcto es **actualizarlo primero en la SUNAT** y luego aquí, no al revés.
+No se puede inscribir en enero una escritura firmada en febrero. Una de las dos fechas está
+mal y desde aquí no se puede saber cuál, así que la web **no elige**: publica el número de
+partida y el registro, que son firmes, y la escritura con la fecha que lleva el propio
+documento. Publicar una fecha que otro papel desmiente es exactamente lo que una tienda de
+aplicaciones llama representación inexacta — y es una de las dos cosas por las que ya
+rechazaron la app.
 
-### 3. La dirección de la propuesta tampoco coincide con el registro
+Conviene aclararlo con el notario o en SUNARP y, cuando se sepa, ponerla.
 
-La propuesta decía *«Jr. Marsella N 255, Piso 4, Asoc. Pro Viv. Buenos Aires, Lima 15423»*.
-La SUNAT registra **CAL. MARSELLA Nro 255, Dpto 4, URB. BUENOS AIRES, SAN JUAN DE
-LURIGANCHO, LIMA**. La web usa la del registro. Diferencias: `Jr.` contra `Calle`, `Asoc.
-Pro Viv.` contra `Urb.`, y sobre todo que **faltaba el distrito**, que es lo que un
-verificador busca primero.
+---
 
-### 4. La actividad económica principal registrada es la 6499, no una de informática
+## LO QUE HAY QUE ARREGLAR FUERA DE ESTE REPOSITORIO
 
-Esto no es un detalle de la web: **conviene mirarlo antes de la verificación de Microsoft.**
+### 1. El correo `anahiytiti@connectadigital.org` no recibe correo ahora mismo
 
-En la ficha RUC, la actividad **principal** es `6499 — Otras actividades de servicios
-financieros, excepto seguros y fondos de pensiones`, y las de informática (`6202` consultoría
-y `6201` programación) están como **secundarias**.
+Comprobado el 21/08/2026 por DNS:
 
-El rechazo de Microsoft Store se apoya en la política 10.2.6, que trata a los productos de
-criptomoneda como asunto financiero. Que el registro público de la empresa la describa
-**principalmente como servicios financieros** empuja en esa misma dirección, justo cuando el
-argumento que se quiere sostener es «somos una empresa de software».
+```
+connectadigital.org   MX  ->  errdomain   (no resuelve)
+connectadigital.org   TXT ->  v=spf1 include:_spf.mail.hostinger.com ~all
+```
 
-La web no lo maquilla: lista las tres actividades sin decir cuál es la principal, que es
-exactamente lo que dice el registro. Pero **cambiar la principal a 6201 en la SUNAT** —un
-trámite de actualización de datos del RUC— alinearía el registro con lo que la empresa hace
-de verdad. Decisión del dueño y de su contador, no mía.
+`errdomain` es el marcador que deja Hostinger cuando el correo del dominio **no está
+configurado**: no es un servidor, no resuelve, y no hay ningún otro registro MX. Cualquier
+mensaje enviado a esa dirección rebota. El SPF sí está puesto, o sea que el dominio está
+preparado para **enviar** pero no para **recibir**.
 
-### 5. El nombre de la gerente general NO está en la web, a propósito
+Se arregla en el panel de Hostinger activando el correo del dominio, que sustituye ese MX por
+los servidores reales. **Hay que hacerlo antes de que nadie use esa dirección**, porque el
+primero que la va a usar es un revisor de tienda.
 
-La propuesta lo ponía en la sección «Sobre nosotros». Se dejó fuera por dos motivos:
+> Aviso al medir: el DNS de este equipo devuelve una IP inventada para cualquier nombre que no
+> existe. La comprobación de arriba se repitió con un nombre de control para descartarlo.
 
-- Ni Apple ni Microsoft piden el nombre del representante legal **en el sitio web**. Lo que
-  comprueban es razón social, identificador fiscal, domicilio y contacto, y eso está todo.
-- Es la misma preferencia que ya se aplicó en `autotradep2p.com`: nada público lleva un
-  nombre personal.
+### 2. El correo está en un dominio y la web en otro
 
-Si se quiere añadir, es una frase en la sección «Nosotros». **Lo que no debe entrar nunca**
-es lo demás que trae la ficha RUC: número de DNI, fecha de nacimiento y porcentaje de
-participación de los socios. Eso es dato personal y no ayuda a ninguna verificación.
+La web va a `connectadigitalsolutions.com` (GoDaddy) y el correo es `@connectadigital.org`
+(Hostinger). Son **dos dominios distintos**, y eso debilita justo la comprobación que viene:
+la verificación de cuenta Company de Microsoft, y la de Apple, piden un correo **del dominio
+de la empresa**, y con dos dominios no está claro cuál lo es.
+
+Lo limpio es crear `contacto@connectadigitalsolutions.com` —el dominio que va a aparecer en
+la web y en la ficha de la tienda— y usar ese. `connectadigitalsolutions.com` **no tiene
+ningún registro MX** hoy, así que hay que contratar el correo en GoDaddy o apuntar el MX a
+otro proveedor.
+
+### 3. Para que la web se vea, hay que cambiar el DNS en GoDaddy
+
+Hoy `connectadigitalsolutions.com` apunta a `3.33.130.190` y `15.197.148.33`, que son las
+direcciones de aparcamiento de GoDaddy. Mientras sigan ahí, lo publicado en GitHub Pages **no
+se ve en el dominio**. Hay que dejarlo como ya está `autotradep2p.com`:
+
+| Tipo | Nombre | Valor |
+|---|---|---|
+| A | @ | `185.199.108.153` |
+| A | @ | `185.199.109.153` |
+| A | @ | `185.199.110.153` |
+| A | @ | `185.199.111.153` |
+| CNAME | www | `blasmani.github.io` |
+
+Hoy `www` es un CNAME al propio dominio; hay que cambiarlo por el de GitHub.
+
+### 4. El objeto social de la escritura no menciona el software
+
+Esto es lo más importante del documento, y conviene leerlo entero.
+
+El **artículo primero** de la escritura dice que la sociedad
+
+> «tendrá como objeto principal dedicarse a realizar actividades de: **otros tipos de
+> intermediación monetaria, PSAV**»
+
+**PSAV es Proveedor de Servicios de Activos Virtuales.** Para el registro público, CONNECTA
+DIGITAL SOLUTIONS S.A.C. es una empresa de intermediación monetaria y de servicios sobre
+criptoactivos. El desarrollo de software no aparece.
+
+Tres consecuencias, y ninguna es teórica:
+
+1. **La web sí puede decir que desarrolla software**, y no es un truco: la escritura añade
+   que «podrá desarrollar todas las actividades anexas y conexas al objeto social», y sobre
+   todo la empresa **registró en la SUNAT las actividades 6201 (programación informática) y
+   6202 (consultoría de informática)**. Eso es un acto propio ante la administración, no una
+   interpretación. Por eso la ficha de la web lista las tres actividades CIIU tal cual.
+2. **Pero si alguien pide la escritura, lee «PSAV».** Las «Notes for Certification» enviadas a
+   Microsoft argumentan que la app no es una plataforma de trading, ni un monedero, ni
+   minería. Eso sigue siendo cierto de la APP. De la EMPRESA, el papel dice otra cosa. Si la
+   publicación se va a apoyar en «somos una empresa de software», lo limpio es **modificar el
+   objeto social** para incluir el desarrollo de software: junta de accionistas, escritura e
+   inscripción en SUNARP.
+3. **Ser PSAV en Perú no es una etiqueta inocua.** Los proveedores de servicios de activos
+   virtuales entran en el ámbito de la normativa de prevención de lavado de activos y tienen
+   obligaciones ante la UIF-SBS. Si la empresa se constituyó así, **hay que preguntarle al
+   contador o al abogado qué implica**, porque no depende de que la actividad se ejerza o no.
+
+### 5. El nombre de la gerente general sí está en la web
+
+Se añadió porque vino en el bloque de datos que mandó el dueño: aparece como «Representante
+legal — Anahiy Marilyn Titi Quispe, Gerente General» en la ficha y en los datos estructurados.
+Ayuda a la verificación y es información pública en SUNARP.
+
+**Lo que NO está y no debe estar nunca**: los números de DNI de los socios, sus fechas de
+nacimiento y sus porcentajes de participación. Todo eso viene en la ficha RUC y en la
+escritura, no ayuda a ninguna verificación y expone a personas reales.
 
 ### 6. «Marca registrada» no se dice hasta que lo sea
 
 El pie dice *«AutoTrade P2P es un producto de CONNECTA DIGITAL SOLUTIONS S.A.C.»*. La
-propuesta decía *«es una marca registrada de»*. La diferencia no es de estilo: afirmar un
-registro de marca que INDECOPI todavía no ha concedido es una declaración falsa sobre la
-empresa, y es justo el tipo de frase que una tienda de aplicaciones marca como
-representación inexacta —que es una de las dos cosas por las que ya rechazaron la app—.
-Cuando el registro se conceda, se cambia la línea y se pone el número de certificado.
+propuesta original decía *«es una marca registrada de»*. Afirmar un registro que INDECOPI
+todavía no ha concedido es una declaración falsa sobre la empresa, y es justo el tipo de frase
+que una tienda marca como representación inexacta. Cuando se conceda, se cambia la línea y se
+pone el número de certificado.
+
+### 7. El teléfono de la web no es el de la SUNAT
+
+La web usa **+51 973 060 599**, el que indicó el dueño como teléfono comercial. La ficha RUC
+registra **940 342 693**. Los dos son suyos, pero quien verifica compara la web con el
+registro. Lo ordenado es **actualizar el teléfono en la SUNAT** para que digan lo mismo.
 
 ---
 
@@ -101,7 +168,7 @@ Cuando el registro se conceda, se cambia la línea y se pone el número de certi
 2. En `Settings → Pages`, origen: rama `main`, carpeta `/ (root)`.
 3. En el dominio, apuntar `connectadigitalsolutions.com` a GitHub Pages: cuatro registros `A`
    a `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, y un `CNAME`
-   de `www` a `<usuario>.github.io`.
+   de `www` a `blasmani.github.io`.
 4. En `Settings → Pages`, marcar **Enforce HTTPS** cuando el certificado esté emitido.
 
 El fichero `CNAME` ya está en el repositorio: no hay que escribir el dominio a mano en la

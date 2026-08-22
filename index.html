@@ -46,11 +46,12 @@
   "legalName": "CONNECTA DIGITAL SOLUTIONS S.A.C.",
   "url": "https://connectadigitalsolutions.com/",
   "logo": "https://connectadigitalsolutions.com/assets/marca.svg",
-  "foundingDate": "2026-01-30",
   "taxID": "20615591221",
+  "founder": { "@type": "Person", "name": "Anahiy Marilyn Titi Quispe" },
+  "employee": { "@type": "Person", "name": "Anahiy Marilyn Titi Quispe", "jobTitle": "Gerente General" },
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Calle Marsella 255, Dpto. 4, Urb. Buenos Aires",
+    "streetAddress": "Jr. Marsella N.º 255, Piso 4, Asoc. Pro Viv. Buenos Aires",
     "addressLocality": "San Juan de Lurigancho",
     "addressRegion": "Lima",
     "addressCountry": "PE"
@@ -58,8 +59,8 @@
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer support",
-    "email": "contacto@connectadigitalsolutions.com",
-    "telephone": "+51940342693",
+    "email": "anahiytiti@connectadigital.org",
+    "telephone": "+51973060599",
     "availableLanguage": ["es", "en"]
   }
 }
@@ -175,7 +176,7 @@
         </div>
         <div class="credenciales__celda">
           <dt data-es="Constituida" data-en="Incorporated">Constituida</dt>
-          <dd><span data-es="30 de enero de 2026" data-en="30 January 2026">30 de enero de 2026</span> <small data-es="Inscrita en Registros Públicos" data-en="Registered with the Public Registry">Inscrita en Registros Públicos</small></dd>
+          <dd><span data-es="Lima, 2026" data-en="Lima, 2026">Lima, 2026</span> <small data-es="Escritura pública ante notario" data-en="By public deed before a notary">Escritura pública ante notario</small></dd>
         </div>
         <div class="credenciales__celda">
           <dt data-es="Sede" data-en="Head office">Sede</dt>
@@ -326,13 +327,39 @@
           <dt data-es="RUC" data-en="Taxpayer number (RUC)">RUC</dt>
           <dd class="mono">20615591221</dd>
         </div>
+        <!--
+          SIN fecha de inscripción, y no es un olvido. La ficha RUC de la SUNAT da como
+          «Fecha Inscripción RR.PP.» el 30/01/2026, pero la escritura pública que constituye
+          la sociedad lleva fecha del 11/02/2026 y su testimonio se expidió el 19/02/2026: no
+          se puede inscribir en enero una escritura firmada en febrero. Las dos fechas salen
+          de documentos oficiales y se contradicen, así que la web no elige una. Lo que sí es
+          firme —el número de partida y el registro— se publica; la fecha, cuando se sepa cuál
+          de las dos vale. Publicar una fecha que un documento desmiente es exactamente lo que
+          una tienda de aplicaciones llama representación inexacta.
+        -->
         <div class="ficha__celda">
           <dt data-es="Partida registral" data-en="Public Registry entry">Partida registral</dt>
-          <dd class="mono">16160309<small data-es="Inscrita el 30 de enero de 2026 — SUNARP, Lima" data-en="Recorded on 30 January 2026 — SUNARP, Lima">Inscrita el 30 de enero de 2026 — SUNARP, Lima</small></dd>
+          <dd class="mono">16160309<small data-es="Registro de Personas Jurídicas — SUNARP, Lima" data-en="Legal Entities Registry — SUNARP, Lima">Registro de Personas Jurídicas — SUNARP, Lima</small></dd>
         </div>
         <div class="ficha__celda">
-          <dt data-es="Domicilio fiscal" data-en="Registered address">Domicilio fiscal</dt>
-          <dd>Calle Marsella 255, Dpto. 4<small data-es="Urb. Buenos Aires, San Juan de Lurigancho, Lima, Perú" data-en="Urb. Buenos Aires, San Juan de Lurigancho, Lima, Peru">Urb. Buenos Aires, San Juan de Lurigancho, Lima, Perú</small></dd>
+          <dt data-es="Constitución" data-en="Incorporation">Constitución</dt>
+          <dd data-es="Escritura pública del 11 de febrero de 2026<small>Notaría Alfredo Zambrano Rodríguez — Lima, Perú</small>" data-en="Public deed of 11 February 2026<small>Notary Alfredo Zambrano Rodríguez — Lima, Peru</small>">Escritura pública del 11 de febrero de 2026<small>Notaría Alfredo Zambrano Rodríguez — Lima, Perú</small></dd>
+        </div>
+        <div class="ficha__celda">
+          <dt data-es="Representante legal" data-en="Legal representative">Representante legal</dt>
+          <dd>Anahiy Marilyn Titi Quispe<small data-es="Gerente General" data-en="General Manager">Gerente General</small></dd>
+        </div>
+        <!--
+          La dirección se escribe como la escritura pública, NO como la normaliza la SUNAT.
+          La escritura dice «JR. MARSELLA 255 INT. PISO 4» y «ASOC. PRO VIVIENDA BUENOS
+          AIRES»; la ficha RUC lo traduce a su propia taxonomía —«CAL. MARSELLA», «URB.
+          BUENOS AIRES», «Dpto 4»— porque sus formularios solo admiten esas abreviaturas.
+          Manda el documento constitutivo. El distrito sí se añade: lo dicen los dos, y es lo
+          primero que busca quien verifica.
+        -->
+        <div class="ficha__celda">
+          <dt data-es="Domicilio" data-en="Registered address">Domicilio</dt>
+          <dd>Jr. Marsella N.º 255, Piso 4<small data-es="Asoc. Pro Viv. Buenos Aires, San Juan de Lurigancho, Lima, Perú" data-en="Asoc. Pro Viv. Buenos Aires, San Juan de Lurigancho, Lima, Peru">Asoc. Pro Viv. Buenos Aires, San Juan de Lurigancho, Lima, Perú</small></dd>
         </div>
         <!--
           Se listan las TRES actividades tal como están inscritas, sin decir cuál es la
@@ -349,13 +376,13 @@
       </dl>
 
       <div class="contactos" id="contacto">
-        <a href="mailto:contacto@connectadigitalsolutions.com">
+        <a href="mailto:anahiytiti@connectadigital.org">
           <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-correo"></use></svg>
-          <span>contacto@connectadigitalsolutions.com</span>
+          <span>anahiytiti@connectadigital.org</span>
         </a>
-        <a href="tel:+51940342693">
+        <a href="tel:+51973060599">
           <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-telefono"></use></svg>
-          <span>+51 940 342 693</span>
+          <span>+51 973 060 599</span>
         </a>
         <a href="https://autotradep2p.com/" rel="noopener">
           <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-globo"></use></svg>
@@ -398,8 +425,8 @@
       <div>
         <h3 data-es="Contacto y legal" data-en="Contact and legal">Contacto y legal</h3>
         <ul>
-          <li><a href="mailto:contacto@connectadigitalsolutions.com">contacto@connectadigitalsolutions.com</a></li>
-          <li><a href="tel:+51940342693">+51 940 342 693</a></li>
+          <li><a href="mailto:anahiytiti@connectadigital.org">anahiytiti@connectadigital.org</a></li>
+          <li><a href="tel:+51973060599">+51 973 060 599</a></li>
           <li><a href="privacidad.html" data-es="Política de privacidad" data-en="Privacy policy">Política de privacidad</a></li>
           <li><a href="https://autotradep2p.com/" rel="noopener">autotradep2p.com</a></li>
         </ul>
