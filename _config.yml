@@ -1,0 +1,13 @@
+# Qué NO sirve GitHub Pages en el dominio.
+#
+# Existe por algo que pasó: el README de este repositorio tenía 301 líneas de notas internas
+# —datos de la constitución, el oficio de la SBS con su número de expediente, las obligaciones
+# ante la UIF— y **GitHub Pages lo servía**: `connectadigitalsolutions.com/README.md` devolvía
+# 200 con todo dentro. No hacía falta ni entrar en GitHub para leerlo.
+#
+# El README de ahora ya no dice nada sensible, así que esto no arregla aquello —eso se arregló
+# vaciándolo—. Está para lo siguiente: para que un fichero de trabajo que alguien añada al
+# repositorio no acabe publicado en el dominio sin que nadie se dé cuenta.
+exclude:
+  - README.md
+  - .gitignore
